@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import React, {Component} from 'react'
+import { Vibration } from 'react-native'
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications'
 import { Card, CardSection, Input, Button, Confirm } from './common';
@@ -29,6 +30,7 @@ class EmployeeEdit extends Component {
   }
   onDecline() {
     this.setState({ showModal: false})
+    Vibration.vibrate([0, 500, 200, 500])
   }
   render() {
     return (

@@ -6,6 +6,7 @@ import { employeesFetch } from '../actions'
 import ListItem from './ListItem'
 
 
+
 class EmployeeList extends Component {
   
   componentWillMount() {
@@ -29,13 +30,13 @@ class EmployeeList extends Component {
 
   render () {
     return (
+
       <ListView 
         enableEmptySections
         dataSource={this.dataSource}
         renderRow={this.renderRow}
       
       />
-
     )
   }
 }

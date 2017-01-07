@@ -8,7 +8,7 @@ import EmployeeEdit from './components/EmployeeEdit'
 
 const RouterComponent = () => {
   return (
-    <Router sceneStyle = {{ paddingTop:60}}>
+    <Router sceneStyle = {{ paddingTop:60}} navigationBarStyle={{  backgroundColor: 'orange'}}>
       <Scene key='auth'>
         <Scene 
           key='login' 
@@ -35,6 +35,7 @@ const RouterComponent = () => {
           key='employeeEdit' 
           component={EmployeeEdit} 
           title='Edit Employee' 
+          rightTitle='Next'
         />
       </Scene>
     </Router>
