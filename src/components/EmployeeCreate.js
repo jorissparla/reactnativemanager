@@ -1,31 +1,39 @@
-import React, {Component} from 'react'
-import { Picker } from 'react-native'
-import { Card, CardSection, Input, Button } from './common'
-import { connect } from 'react-redux'
-import { employeeUpdate } from '../actions'
+import React, { Component } from 'react';
+import { Picker, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { employeeUpdate, employeeCreate } from '../actions';
+import { Card, CardSection, Input, Button } from './common';
 
 class EmployeeCreate extends Component {
+  onButtonPress() {
+    const { name, phone, shift } = this.props
 
-  render () {
+    this.props.employeeCreate({ name, phone, shift: shift || 'Monday'})
+  }
+
+  render() {
     return (
       <Card>
         <CardSection>
-          <Input 
-            label='Name'
-            placeholder='Name'
+          <Input
+            label="Name"
+            placeholder="Jane"
             value={this.props.name}
             onChangeText={value => this.props.employeeUpdate({ prop: 'name', value })}
           />
         </CardSection>
+
         <CardSection>
-          <Input 
-            label='Phone'
-            placeholder='+31(0)681116762'
+          <Input
+            label="Phone"
+            placeholder="+31 (0) 61727383"
             value={this.props.phone}
             onChangeText={value => this.props.employeeUpdate({ prop: 'phone', value })}
-          />        
+          />
         </CardSection>
-        <CardSection>
+
+        <CardSection >
+          <Text >Shift</Text>
           <Picker
             style={{ flex: 1 }}
             selectedValue={this.props.shift}
@@ -40,19 +48,28 @@ class EmployeeCreate extends Component {
             <Picker.Item label="Sunday" value="Sunday" />
           </Picker>
         </CardSection>
+
         <CardSection>
-          <Button>
+          <Button onPress={this.onButtonPress.bind(this)}>
             Create
           </Button>
         </CardSection>
       </Card>
-    )
+    );
   }
 }
 
-const mapStateToProps = ( state) => {
-  const { name, phone, shift } = state.employeeForm
-  return { name, phone, shift }
-}
+const styles = {
+  pickerTextStyle: {
+    fontSize: 18,
+    paddingLeft: 20
+  }
+};
 
-export default connect(mapStateToProps, {employeeUpdate})(EmployeeCreate)
+const mapStateToProps = (state) => {
+  const { name, phone, shift } = state.employeeForm;
+
+  return { name, phone, shift };
+};
+
+export default connect(mapStateToProps, { employeeUpdate, employeeCreate })(EmployeeCreate);
